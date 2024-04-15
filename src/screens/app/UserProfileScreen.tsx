@@ -2,8 +2,9 @@ import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { Header, MusicAlbumCard, PrimaryButton } from "../../components";
 import { Colors } from "../../utils";
+import { NavigationPropType } from "../../types";
 
-const UserProfileScreen = ({ navigation }: any) => {
+const UserProfileScreen = ({ navigation }: NavigationPropType) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.backgroundGray }}>

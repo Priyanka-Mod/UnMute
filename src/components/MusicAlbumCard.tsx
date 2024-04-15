@@ -3,9 +3,15 @@ import React from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useMusic } from "../service/MusicContextService";
 import { MusicData } from "../mockData";
+import { albumList } from "../types";
 
 type AlbumCardType = {
-    albumData: any,
+    albumData: { id: string; url: string; title: string; artist: string; artistId: string; artWork: string; genre: string; genreId: string; }[]
+    | {
+        id: string;
+        name: string;
+        albumImage: string;
+    }[],
     title: string,
     type: 'genre' | 'artist' | 'song'
 }
@@ -13,7 +19,7 @@ type AlbumCardType = {
 export const MusicAlbumCard = ({ albumData, title, type }: AlbumCardType) => {
     const navigation = useNavigation<any>();
     const { updateTrack } = useMusic()
-    const navigateAlbum = (index: number, item: any) => {
+    const navigateAlbum = (index: number, item: { id: string, name: string, albumImage: string }) => {
         const trackData = MusicData.slice(0, 10)
 
         const renderTrack = async () => {

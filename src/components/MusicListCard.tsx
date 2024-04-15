@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useMusic } from "../service/MusicContextService";
-import { albumList } from "../types";
+import { NavigationPropType, albumList } from "../types";
 
 type listType = {
     list: albumList[]

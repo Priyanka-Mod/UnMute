@@ -1,3 +1,5 @@
+import { NavigationAction } from "@react-navigation/native";
+
 export interface albumList {
     artWork: string,
     artist: string,
@@ -7,4 +9,16 @@ export interface albumList {
     id: string,
     title: string,
     url: string
+}
+
+export interface NavigationPropType {
+    navigation: {
+        navigate: (route: string, params?: object) => void;
+        goBack: () => void;
+        dispatch: (action: NavigationAction) => void;
+
+    };
+    route: {
+        params?: string;
+    };
 }

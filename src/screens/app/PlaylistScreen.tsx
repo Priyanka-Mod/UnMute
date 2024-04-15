@@ -5,6 +5,7 @@ import { Colors } from "../../utils";
 import { MusicData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationPropType } from "../../types";
 
 const PlaylistScreen = ({ route }: any) => {
     const url = route.params.url

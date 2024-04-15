@@ -2,6 +2,7 @@ import { Event, State, usePlaybackState, useProgress, useTrackPlayerEvents } fro
 import { pauseTrack, playTrack } from "../service/PlayerService";
 import { useEffect } from "react";
 import { useMusic } from "../service/MusicContextService";
+import PagerView from "react-native-pager-view";
 
 export const usePlayer = (ref?: any) => {
     const { updateMusic, track } = useMusic()
@@ -18,9 +19,7 @@ export const usePlayer = (ref?: any) => {
             console.log("index event : ", event.index)
             ref && ref.current.setPage(event.index);
         }
-
     })
-    // console.log("usePlayer index ", index);
 
     const togglePlayback = async () => {
         if (playBackState?.state) {

@@ -5,8 +5,8 @@ import { Colors } from '../utils';
 type HeaderProps = {
     backgrndTransparent?: boolean
     iconLeft?: ImageSourcePropType;
-    onBackPress?: any;
-    onPressRightIcon?: any;
+    onBackPress?: () => void
+    onPressRightIcon?: () => void
     title?: string;
     rightIcon?: ImageSourcePropType
 };

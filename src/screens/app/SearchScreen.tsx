@@ -5,9 +5,10 @@ import { Colors } from "../../utils";
 import MusicData from './../../constants/music.json'
 import { CategoryData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
+import { NavigationPropType } from "../../types";
 
 const { width } = Dimensions.get('screen')
-const SearchScreen = ({ navigation }: any) => {
+const SearchScreen = ({ navigation }: NavigationPropType) => {
     const { music, track, currentIndex } = useMusic()
 
     // const Genre = [

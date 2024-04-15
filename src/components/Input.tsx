@@ -11,11 +11,10 @@ import {
 
 type InputProps = {
     icon?: ImageSourcePropType;
-    onIconPress?: any;
+    onIconPress?: () => void
     height?: number
     radius?: number
     iconSize?: number
-    iconContainerStyle?: any
 } & TextInputProps;
 export const Input = (props: InputProps) => {
     const [focus, setFocus] = useState(false)

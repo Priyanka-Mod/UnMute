@@ -18,9 +18,9 @@ type MusicContextType = {
     setMusic: Dispatch<SetStateAction<{ [key: string]: any } | null>>;
     track: { [key: string]: any } | null;
     setTrack: Dispatch<SetStateAction<{ [key: string]: any } | null>>;
-    updateMusic: any
+    updateMusic: (obj: albumList, index: number) => Promise<void>
     currentIndex?: number
-    updateTrack: any
+    updateTrack: (trackData: albumList[], trackId: string, index: number) => Promise<void>
 };
 
 const MusicContext = createContext<MusicContextType | undefined>(undefined);
@@ -45,10 +45,13 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
                 const index = await AsyncStorage.getItem('currentIndex')
                 if (index && index !== null) {
                     console.log("currentIndex:======>", index);
-                    setCurrentIndex(parseInt(index))
                     const track = await getTrackData();
+                    console.log("for track", parseInt(index));
+
                     await updateTrack(track.trackData, track.trackId, parseInt(index))
-                    await skipTrackTo(parseInt(index))
+                    setCurrentIndex(parseInt(index))
+
+                    // await skipTrackTo(parseInt(index))
 
                 }
 
@@ -81,17 +84,20 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
         }
     }
 
-    const updateMusic = async (obj: any, index: number) => {
+    const updateMusic = async (obj: albumList, index: number) => {
         await AsyncStorage.setItem("lastMusic", JSON.stringify(obj))
         setMusic(obj)
+        console.log("updateMusiccccccccc", index);
+
         setCurrentIndex(index)
         await AsyncStorage.setItem("currentIndex", JSON.stringify(index))
     }
 
     const updateTrack = async (trackData: albumList[], trackId: string, index: number) => {
         await AsyncStorage.setItem('currentTrack', trackId);
-        await addTrack(trackData)
         setTrack(trackData)
+        await addTrack(trackData)
+        console.log("index update track", index)
         await skipTrackTo(index)
         setCurrentIndex(index)
     }
