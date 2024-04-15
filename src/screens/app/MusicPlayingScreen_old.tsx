@@ -51,7 +51,7 @@ const MusicPlayingScreen = ({ navigation, route }: any) => {
             Alert.alert("Position found called!!!")
             // TrackPlayer.seekTo(positionPresent)
         } else {
-            console.log("indexReceived:", index)
+            // console.log("indexReceived:", index)
             Alert.alert("Skip to song called!!!")
             TrackPlayer.skip(songIndex)
             TrackPlayer.play()
@@ -70,7 +70,7 @@ const MusicPlayingScreen = ({ navigation, route }: any) => {
         ) {
             const activeTrackIndex = await TrackPlayer.getActiveTrackIndex()
 
-            console.log("activeTrack playing screen ---------", activeTrackIndex)
+            // console.log("activeTrack playing screen ---------", activeTrackIndex)
             if (!activeTrackIndex) {
                 return
             }

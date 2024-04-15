@@ -10,15 +10,21 @@ export const usePlayer = (ref?: any) => {
     const { position, duration } = useProgress()
 
     useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async (event) => {
-        console.log("event change called!", event.index, event)
+        // console.log("event change called!", event.index, event)
         if (
             event.type === Event.PlaybackActiveTrackChanged &&
-            event.index != null && track && event.index
+            typeof event.index === 'number' && track
         ) {
             updateMusic(track[event.index], event.index)
             console.log("index event : ", event.index)
-            ref && ref.current.setPage(event.index);
+            if (ref) {
+                ref && ref.current.setPage(event.index)
+                await playTrack()
+            }
+
         }
+
+
     })
 
     const togglePlayback = async () => {
@@ -41,7 +47,9 @@ export const usePlayer = (ref?: any) => {
         }
     }
 
+
     useEffect(() => {
+
     }, []);
 
     return { togglePlayback, playBackState, position, duration, State }

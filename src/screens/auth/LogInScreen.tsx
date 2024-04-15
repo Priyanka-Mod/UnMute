@@ -4,7 +4,7 @@ import { Input, PrimaryButton } from "../../components";
 import { Colors } from "../../utils";
 import { NavigationPropType } from "../../types";
 
-const LogInScreen = ({ navigation }: NavigationPropType) => {
+const LogInScreen = ({ navigation }: any) => {
     return (
         <View style={{ backgroundColor: Colors.backgroundGray, flex: 1 }}>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>

@@ -1,18 +1,20 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { Colors } from "../../utils"
 import { BottomMusicCard, MusicAlbumCard } from "../../components"
 import { useMusic } from "../../service/MusicContextService"
 import { ArtistData, CategoryData, MusicData } from "../../mockData"
 import { NavigationPropType } from "../../types"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
-const HomeScreen = ({ navigation }: NavigationPropType) => {
+const HomeScreen = ({ navigation }: any) => {
     const newRelease = MusicData.slice(0, 10)
     const { music } = useMusic()
     const { currentIndex } = useMusic()
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.backgroundGray }}>
+            <Text style={{ color: 'white' }} onPress={async () => await AsyncStorage.clear()}>Clear storage</Text>
             <View style={{ padding: 20 }}>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: music ? 60 : 0 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>

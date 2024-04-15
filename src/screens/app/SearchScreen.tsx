@@ -8,7 +8,7 @@ import { useMusic } from "../../service/MusicContextService";
 import { NavigationPropType } from "../../types";
 
 const { width } = Dimensions.get('screen')
-const SearchScreen = ({ navigation }: NavigationPropType) => {
+const SearchScreen = ({ navigation }: any) => {
     const { music, track, currentIndex } = useMusic()
 
     // const Genre = [

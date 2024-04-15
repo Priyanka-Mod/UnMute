@@ -12,6 +12,8 @@ import React, {
 import { addTrack, setupPlayer, skipTrackTo } from "./PlayerService";
 import { MusicData } from "../mockData";
 import { albumList } from "../types";
+import TrackPlayer from "react-native-track-player";
+import { reset } from "react-native-track-player/lib/src/trackPlayer";
 
 type MusicContextType = {
     music: { [key: string]: any } | null;
@@ -21,7 +23,8 @@ type MusicContextType = {
     updateMusic: (obj: albumList, index: number) => Promise<void>
     currentIndex?: number
     updateTrack: (trackData: albumList[], trackId: string, index: number) => Promise<void>
-
+    isAdded: boolean
+    setIsAdded: Dispatch<SetStateAction<boolean>>;
 };
 
 const MusicContext = createContext<MusicContextType | undefined>(undefined);
@@ -38,6 +41,7 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
     const [music, setMusic] = useState<{ [key: string]: any } | null>(null);
     const [track, setTrack] = useState<{ [key: string]: any } | null>(null);
     const [currentIndex, setCurrentIndex] = useState<number | undefined>();
+    const [isAdded, setIsAdded] = useState<boolean>(false);
 
     useEffect(() => {
         (async () => {
@@ -45,9 +49,9 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
             if (isSetUp) {
                 const index = await AsyncStorage.getItem('currentIndex')
                 if (index && index !== null) {
-                    console.log("currentIndex:======>", index);
+                    // console.log("currentIndex:======>", index);
                     const track = await getTrackData();
-                    console.log("for track", parseInt(index));
+                    // console.log("for track", parseInt(index));
 
                     await updateTrack(track.trackData, track.trackId, parseInt(index))
                     setCurrentIndex(parseInt(index))
@@ -73,9 +77,9 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
             return { trackData: MusicData.slice(0, 10), trackId: "newTrack" }
         }
         else {
-            const [type, id] = currentTrack.split('-')
+            const [typeOfMusic, id] = currentTrack.split('-')
             let trackDetails
-            if (type === "category") {
+            if (typeOfMusic === "category") {
                 trackDetails = MusicData.filter((music) => music.genreId === id)
             } else {
                 trackDetails = MusicData.filter((music) => music.artistId === id)
@@ -88,7 +92,7 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
     const updateMusic = async (obj: albumList, index: number) => {
         await AsyncStorage.setItem("lastMusic", JSON.stringify(obj))
         setMusic(obj)
-        console.log("updateMusiccccccccc", index);
+        // console.log("updateMusiccccccccc", index);
         setCurrentIndex(index)
         await AsyncStorage.setItem("currentIndex", JSON.stringify(index))
     }
@@ -96,21 +100,33 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
     const updateTrack = async (trackData: albumList[], trackId: string, index: number) => {
         // isAdded = false
         const previousTrack = await AsyncStorage.getItem('currentTrack')
+        // console.log("idsssssssss", previousTrack, trackId);
+
         if (previousTrack === trackId) {
-            console.log("index update track", index)
+            setTrack(trackData)
+            // console.log("index update track", index)
+            setIsAdded(true)
             await skipTrackTo(index)
             setCurrentIndex(index)
         } else {
             setTrack(trackData)
             await AsyncStorage.setItem('currentTrack', trackId);
-            await addTrack(trackData)
-            console.log("index update track", index)
-            await skipTrackTo(index)
-            setCurrentIndex(index)
+            setIsAdded(false)
+            reset()
+            await TrackPlayer.add(trackData).then(async () => {
+                await skipTrackTo(index).then(() => {
+                    setCurrentIndex(index)
+                    setIsAdded(true)
+                })
+
+            })
+
+            // console.log("index update track", index)
+
         }
     }
 
-    return <MusicContext.Provider {...props} value={{ music, setMusic, track, setTrack, updateMusic, currentIndex, updateTrack }} />;
+    return <MusicContext.Provider {...props} value={{ music, setMusic, track, setTrack, updateMusic, currentIndex, updateTrack, isAdded, setIsAdded }} />;
 };
 
 export { MusicProvider, useMusic };

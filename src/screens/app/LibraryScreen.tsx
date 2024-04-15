@@ -6,7 +6,7 @@ import { ArtistData, CategoryData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
 import { NavigationPropType } from "../../types";
 
-const LibraryScreen = ({ navigation }: NavigationPropType) => {
+const LibraryScreen = ({ navigation }: any) => {
     const { music } = useMusic()
     // Add type property to each object in CategoryData
     const categorizedData = CategoryData.map(category => ({ ...category, type: "category" }));

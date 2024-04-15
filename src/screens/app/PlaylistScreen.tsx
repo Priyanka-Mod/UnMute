@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { BottomMusicCard, MusicListCard } from "../../components";
 import { Colors } from "../../utils";
@@ -6,6 +6,7 @@ import { MusicData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationPropType } from "../../types";
+import { playTrack } from "../../service/PlayerService";
 
 const PlaylistScreen = ({ route }: any) => {
     const url = route.params.url
@@ -15,15 +16,15 @@ const PlaylistScreen = ({ route }: any) => {
     const { updateTrack, currentIndex } = useMusic()
     const navigation = useNavigation<any>()
 
-    let type = ''
+    const [type, setType] = useState('')
 
     const listData = useMemo(() => {
         if (artistId) {
-            type = "artist"
+            setType("artist")
             return MusicData.filter((music) => music.artistId === artistId)
         }
         else if (genreId) {
-            type = "category"
+            setType("category")
             return MusicData.filter((music) => music.genreId === genreId)
         }
         else
@@ -40,6 +41,7 @@ const PlaylistScreen = ({ route }: any) => {
 
     const renderNewPlaylist = async () => {
         await updateTrack(listData, trackId, 0)
+        await playTrack()
         navigation.navigate('Playing')
     }
 

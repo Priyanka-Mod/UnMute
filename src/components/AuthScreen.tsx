@@ -6,7 +6,7 @@ import { Colors } from "../utils";
 import { NavigationPropType } from "../types";
 
 
-const AuthScreen = ({ navigation }: NavigationPropType) => {
+const AuthScreen = ({ navigation }: any) => {
     const init = useCallback(async () => {
         const token = await AsyncStorage.getItem('token');
         //console.log('token=> ', token);

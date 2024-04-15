@@ -4,7 +4,7 @@ import { Header, MusicAlbumCard, PrimaryButton } from "../../components";
 import { Colors } from "../../utils";
 import { NavigationPropType } from "../../types";
 
-const UserProfileScreen = ({ navigation }: NavigationPropType) => {
+const UserProfileScreen = ({ navigation }: any) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.backgroundGray }}>

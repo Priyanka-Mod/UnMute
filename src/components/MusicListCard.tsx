@@ -3,6 +3,8 @@ import React from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useMusic } from "../service/MusicContextService";
 import { NavigationPropType, albumList } from "../types";
+import { playTrack, skipTrackTo } from "../service/PlayerService";
+import { usePlayer } from "../hooks/usePlayer";
 
 type listType = {
     list: albumList[]
@@ -10,12 +12,13 @@ type listType = {
 }
 
 export const MusicListCard = ({ list, trackId }: listType) => {
-
-    const { music, updateTrack } = useMusic()
     const navigation = useNavigation<any>()
+    const { music, updateTrack, setMusic, setIsAdded, currentIndex } = useMusic()
+    const { playBackState, State } = usePlayer()
 
     const renderNewPlaylist = async (index: number) => {
         await updateTrack(list, trackId, index)
+        await playTrack()
         navigation.navigate('Playing')
     }
 

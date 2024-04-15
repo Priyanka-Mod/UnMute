@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Dimensions, Image, Platform, Text, TouchableOpacity, View } from "react-native";
 import { Colors } from "../../utils";
 import { Header } from "../../components";
@@ -7,10 +7,11 @@ import { useMusic } from "../../service/MusicContextService";
 import PagerView from "react-native-pager-view";
 import { pauseTrack, playTrack, seekTo, skipToNext, skipToPrevious, skipTrackTo } from "../../service/PlayerService";
 import { usePlayer } from "../../hooks/usePlayer";
+import { NavigationPropType } from "../../types";
 
 const { width, height } = Dimensions.get('screen')
 
-const MusicPlayingScreen = ({ navigation, }: any) => {
+const MusicPlayingScreen = ({ navigation }: any) => {
     const ref = React.useRef<any>(PagerView);
 
     const [isOnDragging, setOnDragging] = useState<boolean>(false)
@@ -30,6 +31,7 @@ const MusicPlayingScreen = ({ navigation, }: any) => {
             setOnDragging(true)
         }
     }
+
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.backgroundGray, }}>
