@@ -2,6 +2,7 @@ import TrackPlayer, { AppKilledPlaybackBehavior, Capability, Event, RepeatMode }
 import { MusicData } from '../mockData';
 import { reset } from 'react-native-track-player/lib/src/trackPlayer';
 import { albumList } from '../types';
+import { MusicProvider, useMusic } from './MusicContextService';
 // import MusicData from './../constants/music.json'
 
 export async function setupPlayer() {
@@ -64,14 +65,13 @@ export async function setupPlayer() {
 }
 
 export async function addTrack(musicData: albumList[]) {
+    // let { isAdded } = useMusic()
     try {
         await reset()
         await TrackPlayer.add(musicData)
         // console.log("🚀 ~ addTrack ~ res:", res)
         console.log("added tracksss");
-
-
-
+        // isAdded = true
     } catch (error) {
         console.log("Error-> ", error);
 

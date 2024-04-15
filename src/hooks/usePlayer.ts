@@ -13,7 +13,7 @@ export const usePlayer = (ref?: any) => {
         console.log("event change called!", event.index, event)
         if (
             event.type === Event.PlaybackActiveTrackChanged &&
-            event.index != null && track
+            event.index != null && track && event.index
         ) {
             updateMusic(track[event.index], event.index)
             console.log("index event : ", event.index)

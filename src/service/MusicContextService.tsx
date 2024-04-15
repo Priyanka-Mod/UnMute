@@ -21,6 +21,7 @@ type MusicContextType = {
     updateMusic: (obj: albumList, index: number) => Promise<void>
     currentIndex?: number
     updateTrack: (trackData: albumList[], trackId: string, index: number) => Promise<void>
+
 };
 
 const MusicContext = createContext<MusicContextType | undefined>(undefined);
@@ -88,18 +89,25 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
         await AsyncStorage.setItem("lastMusic", JSON.stringify(obj))
         setMusic(obj)
         console.log("updateMusiccccccccc", index);
-
         setCurrentIndex(index)
         await AsyncStorage.setItem("currentIndex", JSON.stringify(index))
     }
 
     const updateTrack = async (trackData: albumList[], trackId: string, index: number) => {
-        await AsyncStorage.setItem('currentTrack', trackId);
-        setTrack(trackData)
-        await addTrack(trackData)
-        console.log("index update track", index)
-        await skipTrackTo(index)
-        setCurrentIndex(index)
+        // isAdded = false
+        const previousTrack = await AsyncStorage.getItem('currentTrack')
+        if (previousTrack === trackId) {
+            console.log("index update track", index)
+            await skipTrackTo(index)
+            setCurrentIndex(index)
+        } else {
+            setTrack(trackData)
+            await AsyncStorage.setItem('currentTrack', trackId);
+            await addTrack(trackData)
+            console.log("index update track", index)
+            await skipTrackTo(index)
+            setCurrentIndex(index)
+        }
     }
 
     return <MusicContext.Provider {...props} value={{ music, setMusic, track, setTrack, updateMusic, currentIndex, updateTrack }} />;
