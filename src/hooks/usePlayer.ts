@@ -18,7 +18,9 @@ export const usePlayer = (ref?: any) => {
             console.log("index event : ", event.index)
             ref && ref.current.setPage(event.index);
         }
+
     })
+    // console.log("usePlayer index ", index);
 
     const togglePlayback = async () => {
         if (playBackState?.state) {

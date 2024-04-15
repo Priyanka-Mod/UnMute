@@ -8,7 +8,6 @@ export const BottomMusicCard = () => {
     const navigation = useNavigation<any>()
 
     const { togglePlayback, State, playBackState } = usePlayer();
-
     return (
         <TouchableOpacity onPress={() => {
             navigation.navigate('Playing')

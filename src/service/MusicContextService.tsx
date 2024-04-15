@@ -46,9 +46,10 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
                 if (index && index !== null) {
                     console.log("currentIndex:======>", index);
                     setCurrentIndex(parseInt(index))
-                    await skipTrackTo(parseInt(index))
                     const track = await getTrackData();
                     await updateTrack(track.trackData, track.trackId, parseInt(index))
+                    await skipTrackTo(parseInt(index))
+
                 }
 
                 const obj = await AsyncStorage.getItem('lastMusic')
