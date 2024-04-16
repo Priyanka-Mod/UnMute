@@ -9,74 +9,7 @@ import { NavigationPropType } from "../../types";
 
 const { width } = Dimensions.get('screen')
 const SearchScreen = ({ navigation }: any) => {
-    const { music, track, currentIndex } = useMusic()
-
-    // const Genre = [
-    //     {
-    //         albumImage: 'https://wallpapers.com/images/hd/foam-party-background-x5vdn38j7v8zhfu1.jpg',
-    //         albumName: 'Party'
-    //     },
-    //     {
-    //         albumImage: 'https://static.vecteezy.com/system/resources/thumbnails/023/137/505/small_2x/robot-disc-jockey-at-the-dj-mixer-and-turntable-plays-nightclub-during-party-edm-entertainment-party-concept-neural-network-generated-art-photo.jpg',
-    //         albumName: 'Electronic'
-    //     },
-    //     {
-    //         albumImage: 'https://i.iheart.com/v3/catalog/album/125219095?ops=fit(480%2C480)',
-    //         albumName: 'Chill Vibes'
-    //     },
-    //     {
-    //         albumImage: 'https://i.ytimg.com/vi/fYjN-S3eRgs/maxresdefault.jpg',
-    //         albumName: 'Pop'
-    //     },
-    //     {
-    //         albumImage: 'https://media.istockphoto.com/id/184978684/photo/love-song.jpg?s=612x612&w=0&k=20&c=4M_ZvioFfQphcgCOdqN0AC0Ffv24U9JQ6ouJlbuah2M=',
-    //         albumName: 'Love'
-    //     },
-    //     {
-    //         albumImage: 'https://w0.peakpx.com/wallpaper/895/763/HD-wallpaper-rapper-hood-dark-style-gang-goon-hiphop-music-night-rap-street.jpg',
-    //         albumName: 'Hip Hop'
-    //     },
-    //     {
-    //         albumImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ0OU4OidJ9k4MtMzBLxcmC5j_uarEERn-OSl-SnOx15qZ5peIymuzDkH2C90hNxTwVXw&usqp=CAU',
-    //         albumName: 'Devotional'
-    //     },
-    //     {
-    //         albumImage: 'https://i.pinimg.com/originals/c3/bc/cb/c3bccbf3500ba890e1c2c10dab9f5893.jpg',
-    //         albumName: 'Classical'
-    //     },
-    //     {
-    //         albumImage: 'https://wallpapers.com/images/hd/foam-party-background-x5vdn38j7v8zhfu1.jpg',
-    //         albumName: 'Party'
-    //     },
-    //     {
-    //         albumImage: 'https://static.vecteezy.com/system/resources/thumbnails/023/137/505/small_2x/robot-disc-jockey-at-the-dj-mixer-and-turntable-plays-nightclub-during-party-edm-entertainment-party-concept-neural-network-generated-art-photo.jpg',
-    //         albumName: 'Electronic'
-    //     },
-    //     {
-    //         albumImage: 'https://i.iheart.com/v3/catalog/album/125219095?ops=fit(480%2C480)',
-    //         albumName: 'Chill Vibes'
-    //     },
-    //     {
-    //         albumImage: 'https://i.ytimg.com/vi/fYjN-S3eRgs/maxresdefault.jpg',
-    //         albumName: 'Pop'
-    //     },
-    //     {
-    //         albumImage: 'https://media.istockphoto.com/id/184978684/photo/love-song.jpg?s=612x612&w=0&k=20&c=4M_ZvioFfQphcgCOdqN0AC0Ffv24U9JQ6ouJlbuah2M=',
-    //         albumName: 'Love'
-    //     },
-    //     {
-    //         albumImage: 'https://w0.peakpx.com/wallpaper/895/763/HD-wallpaper-rapper-hood-dark-style-gang-goon-hiphop-music-night-rap-street.jpg',
-    //         albumName: 'Hip Hop'
-    //     },
-    //     {
-    //         albumImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ0OU4OidJ9k4MtMzBLxcmC5j_uarEERn-OSl-SnOx15qZ5peIymuzDkH2C90hNxTwVXw&usqp=CAU',
-    //         albumName: 'Devotional'
-    //     },
-    //     {
-    //         albumImage: 'https://i.pinimg.com/originals/c3/bc/cb/c3bccbf3500ba890e1c2c10dab9f5893.jpg',
-    //         albumName: 'Classical'
-    //     }
-    // ]
+    const { music, currentIndex } = useMusic()
 
     const getRandomColor = () => {
         let n = (Math.random() * 0xfffff * 1000000).toString(16);

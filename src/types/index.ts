@@ -13,12 +13,12 @@ export interface albumList {
 
 export interface NavigationPropType {
     navigation: {
-        navigate: (route: string, params?: object) => void;
+        navigate: (route: string, params?: object | string) => void;
         goBack: () => void;
         dispatch: (action: NavigationAction) => void;
 
     };
     route: {
-        params?: string;
+        params?: object | string;
     };
 }

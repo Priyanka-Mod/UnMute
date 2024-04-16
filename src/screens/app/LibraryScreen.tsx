@@ -29,6 +29,7 @@ const LibraryScreen = ({ navigation }: any) => {
                         return (
                             <View style={{ marginVertical: 10, backgroundColor: 'rgba(128,128,128,0.3)', borderRadius: 10, }}>
                                 <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }} onPress={() => {
+                                    // to conditionally pass params
                                     const params = item.type === "artist" ? { artistId: item.id } : { genreId: item.id };
                                     navigation.navigate('Playlist', { url: item.albumImage, title: item.name, ...params })
                                 }}>

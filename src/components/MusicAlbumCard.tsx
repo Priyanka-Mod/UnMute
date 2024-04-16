@@ -31,7 +31,9 @@ export const MusicAlbumCard = ({ albumData, title, type }: AlbumCardType) => {
             await updateTrack(trackData, "newTrack", index).then(async () => {
                 // console.log("🚀 ~ renderTrack ~ playBackState.state === State.Ready:", playBackState.state, State.Ready)
                 await playTrack()
-                navigation.navigate('Playing')
+                setTimeout(() => {
+                    navigation.navigate('Playing')
+                }, 3000);
 
             })
         }

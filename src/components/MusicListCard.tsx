@@ -19,7 +19,9 @@ export const MusicListCard = ({ list, trackId }: listType) => {
     const renderNewPlaylist = async (index: number) => {
         await updateTrack(list, trackId, index)
         await playTrack()
-        navigation.navigate('Playing')
+        setTimeout(() => {
+            navigation.navigate('Playing')
+        }, 3000);
     }
 
     return (

@@ -49,15 +49,9 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
             if (isSetUp) {
                 const index = await AsyncStorage.getItem('currentIndex')
                 if (index && index !== null) {
-                    // console.log("currentIndex:======>", index);
                     const track = await getTrackData();
-                    // console.log("for track", parseInt(index));
-
                     await updateTrack(track.trackData, track.trackId, parseInt(index))
                     setCurrentIndex(parseInt(index))
-
-                    // await skipTrackTo(parseInt(index))
-
                 }
 
                 const obj = await AsyncStorage.getItem('lastMusic')
@@ -92,37 +86,40 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
     const updateMusic = async (obj: albumList, index: number) => {
         await AsyncStorage.setItem("lastMusic", JSON.stringify(obj))
         setMusic(obj)
-        // console.log("updateMusiccccccccc", index);
         setCurrentIndex(index)
         await AsyncStorage.setItem("currentIndex", JSON.stringify(index))
     }
 
     const updateTrack = async (trackData: albumList[], trackId: string, index: number) => {
-        // isAdded = false
         const previousTrack = await AsyncStorage.getItem('currentTrack')
-        // console.log("idsssssssss", previousTrack, trackId);
-
         if (previousTrack === trackId) {
             setTrack(trackData)
-            // console.log("index update track", index)
+            // alert(index)
             setIsAdded(true)
             await skipTrackTo(index)
             setCurrentIndex(index)
         } else {
             setTrack(trackData)
             await AsyncStorage.setItem('currentTrack', trackId);
+
             setIsAdded(false)
-            reset()
-            await TrackPlayer.add(trackData).then(async () => {
-                await skipTrackTo(index).then(() => {
-                    setCurrentIndex(index)
-                    setIsAdded(true)
-                })
+            await addTrack(trackData)
+            await skipTrackTo(index)
+            setCurrentIndex(index)
+            setTimeout(() => {
+                setIsAdded(true)
+            }, 3000);
 
-            })
-
-            // console.log("index update track", index)
-
+            // setIsAdded(false)
+            // reset()
+            // await TrackPlayer.add(trackData).then(async () => {
+            //     await skipTrackTo(index).then(() => {
+            //         setCurrentIndex(index)
+            //         setTimeout(() => {
+            //             setIsAdded(true)
+            //         }, 3000);
+            //     })
+            // })
         }
     }
 

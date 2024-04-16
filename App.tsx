@@ -22,7 +22,7 @@ const App = () => {
         <Fragment><View style={{ flex: 1, }}>
           <StatusBar backgroundColor='white'
             barStyle='light-content' />
-          <Stack.Navigator initialRouteName="LogIn" screenOptions={{
+          <Stack.Navigator initialRouteName="Auth" screenOptions={{
             headerShown: false
           }}>
             <Stack.Screen name="Auth" component={AuthScreen} />

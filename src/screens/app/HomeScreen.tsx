@@ -14,7 +14,6 @@ const HomeScreen = ({ navigation }: any) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.backgroundGray }}>
-            <Text style={{ color: 'white' }} onPress={async () => await AsyncStorage.clear()}>Clear storage</Text>
             <View style={{ padding: 20 }}>
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: music ? 60 : 0 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>

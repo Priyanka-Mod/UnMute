@@ -37,7 +37,7 @@ const MusicPlayingScreen = ({ navigation, route }: any) => {
 
         if (index < data.length && index >= 0) {
             // Alert.alert('upadatingMusic called!!!!')
-            updateMusic(data[index])
+            updateMusic(data[index], index)
         }
         if (positionPresent) {
             isPositionPresent()

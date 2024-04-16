@@ -66,12 +66,8 @@ export async function setupPlayer() {
 
 export async function addTrack(musicData: albumList[]) {
     try {
-        // const { setIsAdded } = useMusic()
-        // setIsAdded(false)
         await reset()
         await TrackPlayer.add(musicData)
-        // console.log("added tracksss");
-        // setIsAdded(true)
     } catch (error) {
         console.log("Error-> ", error);
     }

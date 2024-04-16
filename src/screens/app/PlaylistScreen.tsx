@@ -5,7 +5,6 @@ import { Colors } from "../../utils";
 import { MusicData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationPropType } from "../../types";
 import { playTrack } from "../../service/PlayerService";
 
 const PlaylistScreen = ({ route }: any) => {
@@ -42,7 +41,9 @@ const PlaylistScreen = ({ route }: any) => {
     const renderNewPlaylist = async () => {
         await updateTrack(listData, trackId, 0)
         await playTrack()
-        navigation.navigate('Playing')
+        setTimeout(() => {
+            navigation.navigate('Playing')
+        }, 3000);
     }
 
     return (
