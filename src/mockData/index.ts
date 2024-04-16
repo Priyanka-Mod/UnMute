@@ -472,3 +472,26 @@ export const ArtistData = [
 //         albumName: 'Classical'
 //     }
 // ]
+
+// let isSetup = false;
+// await TrackPlayer.setupPlayer()
+// await TrackPlayer.add(MusicData)
+// await TrackPlayer.updateOptions({
+//     android: {
+//         appKilledPlaybackBehavior:
+//             AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
+//         alwaysPauseOnInterruption: true,
+//     },
+//     capabilities: [
+//         Capability.Play,
+//         Capability.Pause,
+//         Capability.SkipToNext,
+//         Capability.SkipToPrevious,
+//         Capability.SeekTo,
+//     ],
+//     compactCapabilities: [Capability.Play, Capability.Pause],
+//     progressUpdateEventInterval: 1,
+// })
+// isSetup = true
+
+// return isSetup;

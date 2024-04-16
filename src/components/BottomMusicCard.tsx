@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native"
 import { ActivityIndicator, Image, Text, TouchableOpacity, View } from "react-native"
 import { useMusic } from "../service/MusicContextService"
 import { usePlayer } from "../hooks/usePlayer"
-import { NavigationPropType } from "../types"
 
 export const BottomMusicCard = () => {
     const { music, isAdded } = useMusic()

@@ -12,8 +12,6 @@ import React, {
 import { addTrack, setupPlayer, skipTrackTo } from "./PlayerService";
 import { MusicData } from "../mockData";
 import { albumList } from "../types";
-import TrackPlayer from "react-native-track-player";
-import { reset } from "react-native-track-player/lib/src/trackPlayer";
 
 type MusicContextType = {
     music: { [key: string]: any } | null;

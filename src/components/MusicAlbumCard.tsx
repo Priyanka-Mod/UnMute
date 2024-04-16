@@ -1,21 +1,12 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useMusic } from "../service/MusicContextService";
 import { MusicData } from "../mockData";
-import { NavigationPropType } from "../types";
-import { usePlayer } from "../hooks/usePlayer";
-import { pauseTrack, playTrack } from "../service/PlayerService";
+import { playTrack } from "../service/PlayerService";
 
 type AlbumCardType = {
     albumData: { id: string; name?: string; url?: string; albumImage?: string; title?: string; artist?: string; artistId?: string; artWork?: string; genre?: string; genreId?: string; }[]
-    // | {
-    //     id: string;
-    //     name: string;
-    //     albumImage: string;
-    // }[]
-    ,
-    // albumData: any
     title: string,
     type: 'genre' | 'artist' | 'song'
 }
@@ -23,7 +14,6 @@ type AlbumCardType = {
 export const MusicAlbumCard = ({ albumData, title, type }: AlbumCardType) => {
     const { updateTrack } = useMusic()
     const navigation = useNavigation<any>()
-    const { playBackState, State } = usePlayer()
     const navigateAlbum = (index: number, item: { id: string, name?: string, albumImage?: string }) => {
         const trackData = MusicData.slice(0, 10)
 
@@ -37,11 +27,6 @@ export const MusicAlbumCard = ({ albumData, title, type }: AlbumCardType) => {
 
             })
         }
-
-        // const renderTrack = async () => {
-        //     await updateTrack(trackData, "newTrack", index)
-        //     navigation.navigate('Playing')
-        // }
 
         switch (type) {
             case 'song':

@@ -1,11 +1,9 @@
-import React, { useCallback, useState } from "react"
+import React from "react"
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { Colors } from "../../utils"
 import { BottomMusicCard, MusicAlbumCard } from "../../components"
 import { useMusic } from "../../service/MusicContextService"
 import { ArtistData, CategoryData, MusicData } from "../../mockData"
-import { NavigationPropType } from "../../types"
-import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const HomeScreen = ({ navigation }: any) => {
     const newRelease = MusicData.slice(0, 10)

@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Dimensions, FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { BottomMusicCard, Header, Input } from "../../components";
 import { Colors } from "../../utils";
-import MusicData from './../../constants/music.json'
 import { CategoryData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
-import { NavigationPropType } from "../../types";
 
 const { width } = Dimensions.get('screen')
 const SearchScreen = ({ navigation }: any) => {

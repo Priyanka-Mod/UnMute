@@ -1,15 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CommonActions } from "@react-navigation/native";
 import React, { useCallback, useEffect } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, View } from "react-native";
 import { Colors } from "../utils";
-import { NavigationPropType } from "../types";
 
 
 const AuthScreen = ({ navigation }: any) => {
     const init = useCallback(async () => {
         const token = await AsyncStorage.getItem('token');
-        //console.log('token=> ', token);
         if (token) {
             navigation.dispatch(
                 CommonActions.reset({

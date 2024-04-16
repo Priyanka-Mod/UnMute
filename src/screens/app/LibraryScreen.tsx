@@ -4,7 +4,6 @@ import { BottomMusicCard, Header } from "../../components";
 import { Colors } from "../../utils";
 import { ArtistData, CategoryData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
-import { NavigationPropType } from "../../types";
 
 const LibraryScreen = ({ navigation }: any) => {
     const { music } = useMusic()
