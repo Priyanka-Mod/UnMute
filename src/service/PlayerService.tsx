@@ -2,8 +2,6 @@ import TrackPlayer, { AppKilledPlaybackBehavior, Capability, Event, RepeatMode }
 import { MusicData } from '../mockData';
 import { reset } from 'react-native-track-player/lib/src/trackPlayer';
 import { albumList } from '../types';
-import { MusicProvider, useMusic } from './MusicContextService';
-// import MusicData from './../constants/music.json'
 
 export async function setupPlayer() {
     let isSetup = false;

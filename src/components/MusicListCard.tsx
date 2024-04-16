@@ -13,10 +13,10 @@ type listType = {
 export const MusicListCard = ({ list, trackId }: listType) => {
     const navigation = useNavigation<any>()
     const { music, updateTrack } = useMusic()
-
     const renderNewPlaylist = async (index: number) => {
         await updateTrack(list, trackId, index)
         await playTrack()
+        // setTimeout to fix android
         setTimeout(() => {
             navigation.navigate('Playing')
         }, 3000);
