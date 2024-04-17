@@ -24,7 +24,7 @@ export const MusicAlbumCard = ({ albumData, title, type }: AlbumCardType) => {
                 // setTimeout to fix android
                 setTimeout(() => {
                     navigation.navigate('Playing')
-                }, 3000);
+                }, 2000);
 
             })
         }

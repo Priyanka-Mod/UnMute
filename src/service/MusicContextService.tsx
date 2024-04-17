@@ -92,7 +92,6 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
         const previousTrack = await AsyncStorage.getItem('currentTrack')
         if (previousTrack === trackId) {
             setTrack(trackData)
-            // alert(index)
             setIsAdded(true)
             await skipTrackTo(index)
             setCurrentIndex(index)

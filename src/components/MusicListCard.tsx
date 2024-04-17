@@ -17,9 +17,9 @@ export const MusicListCard = ({ list, trackId }: listType) => {
         await updateTrack(list, trackId, index)
         await playTrack()
         // setTimeout to fix android
-        setTimeout(() => {
-            navigation.navigate('Playing')
-        }, 3000);
+        // setTimeout(() => {
+        //     navigation.navigate('Playing')
+        // }, 3000);
     }
 
     return (

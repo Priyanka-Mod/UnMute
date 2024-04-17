@@ -42,9 +42,9 @@ const PlaylistScreen = ({ route }: any) => {
         await updateTrack(listData, trackId, 0)
         await playTrack()
         // setTimeout to fix android
-        setTimeout(() => {
-            navigation.navigate('Playing')
-        }, 3000);
+        // setTimeout(() => {
+        //     navigation.navigate('Playing')
+        // }, 3000);
     }
 
     return (
