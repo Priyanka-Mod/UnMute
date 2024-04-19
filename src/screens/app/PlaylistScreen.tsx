@@ -5,14 +5,17 @@ import { Colors } from "../../utils";
 import { MusicData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
 import { useNavigation } from "@react-navigation/native";
-import { playTrack } from "../../service/PlayerService";
+import { pauseTrack, playTrack } from "../../service/PlayerService";
+import { usePlayer } from "../../hooks/usePlayer";
+import { pause } from "react-native-track-player/lib/src/trackPlayer";
 
 const PlaylistScreen = ({ route }: any) => {
     const url = route.params.url
     const title = route.params.title
     const genreId = route.params.genreId
     const artistId = route.params.artistId
-    const { updateTrack, currentIndex } = useMusic()
+    const { updateTrack, currentIndex, currentTrackId } = useMusic()
+    const { togglePlayback, playBackState, State } = usePlayer()
     const navigation = useNavigation<any>()
 
     const [type, setType] = useState('')
@@ -38,14 +41,15 @@ const PlaylistScreen = ({ route }: any) => {
     }
     const trackId = type.concat('-', Id)
 
+
     const renderNewPlaylist = async () => {
+        console.log("new data : ", currentTrackId, trackId);
+
         await updateTrack(listData, trackId, 0)
         await playTrack()
-        // setTimeout to fix android
-        // setTimeout(() => {
-        //     navigation.navigate('Playing')
-        // }, 3000);
     }
+
+
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.backgroundGray, }}>
@@ -74,11 +78,19 @@ const PlaylistScreen = ({ route }: any) => {
                 <TouchableOpacity>
                     <Image style={{ height: 40, width: 40, tintColor: 'white' }} source={require('./../../assets/img/heart.png')} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ padding: 15, backgroundColor: Colors.primaryPurple, borderRadius: 100 }} onPress={renderNewPlaylist}>
-                    <Image style={{ tintColor: 'white', width: 20, height: 20 }} source={require('./../../assets/img/playButton.png')} />
-                </TouchableOpacity>
-            </View>
 
+
+                {currentTrackId === trackId ?
+                    <TouchableOpacity style={{ padding: 15, backgroundColor: Colors.primaryPurple, borderRadius: 100 }} onPress={() => togglePlayback()}>
+                        <Image style={{ tintColor: 'white', width: 20, height: 20 }} source={playBackState.state === State.Playing ? require('./../../assets/img/pause.png') : require('./../../assets/img/playButton.png')} />
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={{ padding: 15, backgroundColor: Colors.primaryPurple, borderRadius: 100 }} onPress={renderNewPlaylist}>
+                        <Image style={{ tintColor: 'white', width: 20, height: 20 }} source={require("./../../assets/img/playButton.png")} />
+                    </TouchableOpacity>
+
+                }
+            </View>
             <MusicListCard list={listData} trackId={trackId} />
             {currentIndex !== undefined ? <BottomMusicCard /> : null}
 

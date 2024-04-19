@@ -4,12 +4,11 @@ import { useEffect } from "react";
 import { useMusic } from "../service/MusicContextService";
 
 export const usePlayer = (ref?: any) => {
-    const { updateMusic, track } = useMusic()
+    const { updateMusic, track, isAdded } = useMusic()
     const playBackState = usePlaybackState()
     const { position, duration } = useProgress()
 
     useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async (event) => {
-        // console.log("event change called!", event.index, event)
         if (
             event.type === Event.PlaybackActiveTrackChanged &&
             typeof event.index === 'number' && track

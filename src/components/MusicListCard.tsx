@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useMusic } from "../service/MusicContextService";
@@ -11,15 +10,10 @@ type listType = {
 }
 
 export const MusicListCard = ({ list, trackId }: listType) => {
-    const navigation = useNavigation<any>()
     const { music, updateTrack } = useMusic()
     const renderNewPlaylist = async (index: number) => {
         await updateTrack(list, trackId, index)
         await playTrack()
-        // setTimeout to fix android
-        // setTimeout(() => {
-        //     navigation.navigate('Playing')
-        // }, 3000);
     }
 
     return (

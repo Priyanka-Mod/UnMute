@@ -23,6 +23,7 @@ type MusicContextType = {
     updateTrack: (trackData: albumList[], trackId: string, index: number) => Promise<void>
     isAdded: boolean
     setIsAdded: Dispatch<SetStateAction<boolean>>;
+    currentTrackId?: string
 };
 
 const MusicContext = createContext<MusicContextType | undefined>(undefined);
@@ -40,6 +41,7 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
     const [track, setTrack] = useState<{ [key: string]: any } | null>(null);
     const [currentIndex, setCurrentIndex] = useState<number | undefined>();
     const [isAdded, setIsAdded] = useState<boolean>(false);
+    const [currentTrackId, setCurrentTrackId] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         (async () => {
@@ -76,7 +78,6 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
             } else {
                 trackDetails = MusicData.filter((music) => music.artistId === id)
             }
-
             return { trackData: trackDetails, trackId: currentTrack }
         }
     }
@@ -88,39 +89,26 @@ const MusicProvider = (props: { children: ReactNode }): ReactElement => {
         await AsyncStorage.setItem("currentIndex", JSON.stringify(index))
     }
 
-    const updateTrack = async (trackData: albumList[], trackId: string, index: number) => {
-        const previousTrack = await AsyncStorage.getItem('currentTrack')
-        if (previousTrack === trackId) {
-            setTrack(trackData)
-            setIsAdded(true)
-            await skipTrackTo(index)
-            setCurrentIndex(index)
-        } else {
-            setTrack(trackData)
-            await AsyncStorage.setItem('currentTrack', trackId);
 
-            setIsAdded(false)
+
+    const updateTrack = async (trackData: albumList[], trackId: string, index: number) => {
+        setIsAdded(false)
+        const previousTrack = currentTrackId;
+        setTrack(trackData)
+        if (previousTrack === trackId) {
+            setCurrentIndex(index)
+            await skipTrackTo(index)
+        } else {
+            setCurrentTrackId(trackId)
+            await AsyncStorage.setItem('currentTrack', trackId);
             await addTrack(trackData)
             await skipTrackTo(index)
             setCurrentIndex(index)
-            setTimeout(() => {
-                setIsAdded(true)
-            }, 3000);
-
-            // setIsAdded(false)
-            // reset()
-            // await TrackPlayer.add(trackData).then(async () => {
-            //     await skipTrackTo(index).then(() => {
-            //         setCurrentIndex(index)
-            //         setTimeout(() => {
-            //             setIsAdded(true)
-            //         }, 3000);
-            //     })
-            // })
         }
+        setIsAdded(true)
     }
 
-    return <MusicContext.Provider {...props} value={{ music, setMusic, track, setTrack, updateMusic, currentIndex, updateTrack, isAdded, setIsAdded }} />;
+    return <MusicContext.Provider {...props} value={{ music, setMusic, track, setTrack, updateMusic, currentIndex, updateTrack, isAdded, setIsAdded, currentTrackId }} />;
 };
 
 export { MusicProvider, useMusic };
