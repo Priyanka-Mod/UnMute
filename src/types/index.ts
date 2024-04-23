@@ -18,7 +18,12 @@ export interface NavigationPropType {
         dispatch: (action: NavigationAction) => void;
 
     };
-    route: {
-        params?: object | string;
-    };
+}
+
+export interface PageViewEvent {
+    nativeEvent: {
+        position?: number; // Optional property for onPageSelected
+        pageScrollState?: string; // Optional property for onPageScrollStateChanged
+
+    },
 }

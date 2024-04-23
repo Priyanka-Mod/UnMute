@@ -4,8 +4,13 @@ import { BottomMusicCard, Header } from "../../components";
 import { Colors } from "../../utils";
 import { ArtistData, CategoryData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
+import { useNavigation } from "@react-navigation/native";
 
-const LibraryScreen = ({ navigation }: any) => {
+type NavType = {
+    navigate: (value: string, params?: object) => void
+}
+const LibraryScreen = () => {
+    const navigation = useNavigation<NavType>()
     const { music } = useMusic()
     // Add type property to each object in CategoryData
     const categorizedData = CategoryData.map(category => ({ ...category, type: "category" }));

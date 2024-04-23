@@ -2,8 +2,9 @@ import React from "react";
 import { Image, Text, View } from "react-native";
 import { Input, PrimaryButton } from "../../components";
 import { Colors } from "../../utils";
+import { NavigationPropType } from "../../types";
 
-const RegisterScreen = ({ navigation }: any) => {
+const RegisterScreen = ({ navigation }: NavigationPropType) => {
     return (
         <View style={{ backgroundColor: Colors.backgroundGray, flex: 1 }}>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>

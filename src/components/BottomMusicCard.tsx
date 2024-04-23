@@ -2,17 +2,21 @@ import { useNavigation } from "@react-navigation/native"
 import { ActivityIndicator, Image, Text, TouchableOpacity, View } from "react-native"
 import { useMusic } from "../service/MusicContextService"
 import { usePlayer } from "../hooks/usePlayer"
+import { NavigationPropType } from "../types"
 
+type NavType = {
+    navigate: (value: string) => void
+}
 export const BottomMusicCard = () => {
+    const navigation = useNavigation<NavType>()
     const { music, isAdded } = useMusic()
-    const navigation = useNavigation<any>()
     const { togglePlayback, State, playBackState } = usePlayer();
     return (
         <View style={{ paddingHorizontal: 10, backgroundColor: '#313131', position: 'absolute', zIndex: 2, height: 60, width: '90%', bottom: 0, alignSelf: 'center' }}>
             {
                 isAdded && music ?
                     <TouchableOpacity onPress={() => {
-                        navigation.navigate('Playing')
+                        navigation.navigate("Playing")
                     }} style={{ paddingHorizontal: 10, backgroundColor: '#313131', position: 'absolute', zIndex: 10, height: 60, width: '100%', alignSelf: 'center', alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', bottom: 0, borderRadius: 8 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={{ borderRadius: 10, height: 45, width: 45 }} source={{ uri: music.artWork }} />

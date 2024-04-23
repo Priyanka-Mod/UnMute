@@ -1,10 +1,13 @@
 import { Event, State, usePlaybackState, useProgress, useTrackPlayerEvents } from "react-native-track-player";
 import { pauseTrack, playTrack } from "../service/PlayerService";
-import { useEffect } from "react";
+import React, { Ref, useEffect } from "react";
 import { useMusic } from "../service/MusicContextService";
+import PagerView from "react-native-pager-view";
 
-export const usePlayer = (ref?: any) => {
-    const { updateMusic, track, isAdded } = useMusic()
+export const usePlayer = (ref?: React.RefObject<PagerView>) => {
+    // console.log("ref type: ", typeof ref);
+
+    const { updateMusic, track } = useMusic()
     const playBackState = usePlaybackState()
     const { position, duration } = useProgress()
 
@@ -15,7 +18,7 @@ export const usePlayer = (ref?: any) => {
         ) {
             updateMusic(track[event.index], event.index)
             if (ref) {
-                ref && ref.current.setPage(event.index)
+                ref && ref?.current?.setPage(event.index)
                 await playTrack()
             }
         }

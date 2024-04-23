@@ -11,9 +11,14 @@ type AlbumCardType = {
     type: 'genre' | 'artist' | 'song'
 }
 
+type NavType = {
+    navigate: (value: string, params?: object) => void,
+
+}
+
 export const MusicAlbumCard = ({ albumData, title, type }: AlbumCardType) => {
     const { updateTrack } = useMusic()
-    const navigation = useNavigation<any>()
+    const navigation = useNavigation<NavType>()
     const navigateAlbum = (index: number, item: { id: string, name?: string, albumImage?: string }) => {
         const trackData = MusicData.slice(0, 10)
 

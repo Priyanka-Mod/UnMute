@@ -4,8 +4,9 @@ import { Colors } from "../../utils"
 import { BottomMusicCard, MusicAlbumCard } from "../../components"
 import { useMusic } from "../../service/MusicContextService"
 import { ArtistData, CategoryData, MusicData } from "../../mockData"
+import { NavigationPropType } from "../../types"
 
-const HomeScreen = ({ navigation }: any) => {
+const HomeScreen = ({ navigation }: NavigationPropType) => {
     const newRelease = MusicData.slice(0, 10)
     const { music } = useMusic()
     const { currentIndex } = useMusic()

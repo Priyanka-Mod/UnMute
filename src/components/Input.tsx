@@ -29,7 +29,7 @@ export const Input = (props: InputProps) => {
                 onFocus={() => setFocus(true)}
                 onBlur={() => setFocus(false)}
                 value={props.value}
-                {...props} //any props of children will work with this seperator
+                {...props}
             />
             <TouchableOpacity onPress={props.onIconPress} >
                 <Image style={{ width: props.iconSize, height: props.iconSize, tintColor: 'white' }} source={props.icon} />

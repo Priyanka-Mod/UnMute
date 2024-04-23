@@ -14,10 +14,10 @@ import { MusicData } from "../mockData";
 import { albumList } from "../types";
 
 type MusicContextType = {
-    music: { [key: string]: any } | null;
-    setMusic: Dispatch<SetStateAction<{ [key: string]: any } | null>>;
-    track: { [key: string]: any } | null;
-    setTrack: Dispatch<SetStateAction<{ [key: string]: any } | null>>;
+    music: albumList | null;
+    setMusic: Dispatch<SetStateAction<albumList | null>>;
+    track: albumList[] | null;
+    setTrack: Dispatch<SetStateAction<albumList[] | null>>;
     updateMusic: (obj: albumList, index: number) => Promise<void>
     currentIndex?: number
     updateTrack: (trackData: albumList[], trackId: string, index: number) => Promise<void>
@@ -37,8 +37,8 @@ function useMusic(): MusicContextType {
 }
 
 const MusicProvider = (props: { children: ReactNode }): ReactElement => {
-    const [music, setMusic] = useState<{ [key: string]: any } | null>(null);
-    const [track, setTrack] = useState<{ [key: string]: any } | null>(null);
+    const [music, setMusic] = useState<albumList | null>(null);
+    const [track, setTrack] = useState<albumList[] | null>(null);
     const [currentIndex, setCurrentIndex] = useState<number | undefined>();
     const [isAdded, setIsAdded] = useState<boolean>(false);
     const [currentTrackId, setCurrentTrackId] = useState<string | undefined>(undefined);

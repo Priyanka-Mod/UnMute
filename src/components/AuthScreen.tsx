@@ -4,9 +4,10 @@ import React, { useCallback, useEffect } from "react";
 import { Image, View } from "react-native";
 import { Colors } from "../utils";
 import SplashScreen from "react-native-splash-screen";
+import { NavigationPropType } from "../types";
 
 
-const AuthScreen = ({ navigation }: any) => {
+const AuthScreen = ({ navigation }: NavigationPropType) => {
     const init = useCallback(async () => {
         const token = await AsyncStorage.getItem('token');
         if (!token) {

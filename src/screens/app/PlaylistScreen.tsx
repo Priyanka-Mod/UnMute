@@ -9,14 +9,24 @@ import { pauseTrack, playTrack } from "../../service/PlayerService";
 import { usePlayer } from "../../hooks/usePlayer";
 import { pause } from "react-native-track-player/lib/src/trackPlayer";
 
-const PlaylistScreen = ({ route }: any) => {
+type route = {
+    route: {
+        params: {
+            url?: string
+            title?: string
+            genreId?: string
+            artistId?: string
+        }
+    }
+}
+const PlaylistScreen = ({ route }: route) => {
     const url = route.params.url
     const title = route.params.title
     const genreId = route.params.genreId
     const artistId = route.params.artistId
     const { updateTrack, currentIndex, currentTrackId } = useMusic()
     const { togglePlayback, playBackState, State } = usePlayer()
-    const navigation = useNavigation<any>()
+    const navigation = useNavigation()
 
     const [type, setType] = useState('')
 
@@ -39,7 +49,7 @@ const PlaylistScreen = ({ route }: any) => {
     } else {
         Id = genreId
     }
-    const trackId = type.concat('-', Id)
+    const trackId = type.concat('-', Id as string)
 
 
     const renderNewPlaylist = async () => {

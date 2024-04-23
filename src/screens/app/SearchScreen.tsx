@@ -4,9 +4,10 @@ import { BottomMusicCard, Header, Input } from "../../components";
 import { Colors } from "../../utils";
 import { CategoryData } from "../../mockData";
 import { useMusic } from "../../service/MusicContextService";
+import { NavigationPropType } from "../../types";
 
 const { width } = Dimensions.get('screen')
-const SearchScreen = ({ navigation }: any) => {
+const SearchScreen = ({ navigation }: NavigationPropType) => {
     const { music, currentIndex } = useMusic()
 
     const getRandomColor = () => {
