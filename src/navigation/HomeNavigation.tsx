@@ -4,7 +4,19 @@ import UserProfileScreen from "../screens/app/UserProfileScreen"
 import PlaylistScreen from "../screens/app/PlaylistScreen"
 import MusicPlayingScreen from "../screens/app/MusicPlayingScreen"
 
-const Stack = createNativeStackNavigator()
+
+type NavType = {
+    Home: undefined,
+    UserProfile: undefined,
+    Playlist: {
+        url?: string
+        title?: string
+        genreId?: string
+        artistId?: string
+    },
+    Playing: undefined
+}
+const Stack = createNativeStackNavigator<NavType>()
 
 
 const HomeNavigation = () => {
